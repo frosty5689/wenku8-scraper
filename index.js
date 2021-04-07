@@ -91,7 +91,9 @@ const get_script = async () => {
   books.forEach(async (book) => {
     //console.log(`sync_light_novel "${book.url}" "${book.name}.umd"`);
     await download_book(book);
-  })
+  });
+
+  console.log(`Finished processing ${books.length} books...`);
 }
 
 get_script();
