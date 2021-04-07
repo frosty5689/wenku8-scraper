@@ -1,0 +1,19 @@
+{
+  "name": "wenku8-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "axios-cookiejar-support": "^1.0.1",
+    "form-data": "^3.0.0",
+    "jsdom": "^16.4.0",
+    "tough-cookie": "^4.0.0",
+    "wget-improved": "^3.2.1"
+  }
+}
