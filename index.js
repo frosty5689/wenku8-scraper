@@ -2,7 +2,6 @@ const axios = require("axios");
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 const tough = require('tough-cookie');
 const FormData = require('form-data');
-const CREDENTIALS = require("./creds");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const util = require('util');
@@ -79,8 +78,8 @@ const download_book = async (book) => {
 }
 
 const get_script = async () => {
-  const username = process.env.WENKU8_USERNAME || CREDENTIALS.username;
-  const password = process.env.WENKU8_PASSWORD || CREDENTIALS.password;
+  const username = process.env.WENKU8_USERNAME;
+  const password = process.env.WENKU8_PASSWORD;
 
   const response = await login(username, password);
 
