@@ -54,7 +54,7 @@ const get_books = async () => {
 }
 
 const download_book = async (book) => {
-  console.log(`Downloading ${books.name}...`);
+  console.log(`Downloading ${book.name}...`);
   try {
     const cmd = `wget -N --no-if-modified-since "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
     //console.log(cmd)
@@ -81,7 +81,7 @@ const download_book = async (book) => {
 const get_script = async () => {
   const username = process.env.WENKU8_USERNAME;
   const password = process.env.WENKU8_PASSWORD;
-
+  console.log('Logging in...');
   const response = await login(username, password);
 
   const books = await get_books();
