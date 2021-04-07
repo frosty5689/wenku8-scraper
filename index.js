@@ -88,7 +88,7 @@ const get_script = async () => {
   fs.mkdirSync(temp_path, { recursive: true })
   process.chdir(temp_path);
   console.log(`Processing ${books.length} books...`);
-  books.forEach(async (book) => {
+  await books.reduce(async (prevBook, book) => {
     //console.log(`sync_light_novel "${book.url}" "${book.name}.umd"`);
     await download_book(book);
   });
