@@ -54,6 +54,7 @@ const get_books = async () => {
 }
 
 const download_book = async (book) => {
+  console.log(`Downloading ${books.name}...`);
   try {
     const cmd = `wget -N --no-if-modified-since "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
     //console.log(cmd)
@@ -86,6 +87,7 @@ const get_script = async () => {
   const books = await get_books();
   fs.mkdirSync(temp_path, { recursive: true })
   process.chdir(temp_path);
+  console.log(`Processing ${books.length} books...`);
   books.forEach(async (book) => {
     //console.log(`sync_light_novel "${book.url}" "${book.name}.umd"`);
     await download_book(book);
