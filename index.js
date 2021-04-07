@@ -54,7 +54,6 @@ const get_books = async () => {
 }
 
 const download_book = async (book) => {
-  console.log(`Downloading ${book.name}...`);
   try {
     const cmd = `wget -N --no-if-modified-since "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
     //console.log(cmd)
@@ -76,6 +75,7 @@ const download_book = async (book) => {
   catch (e) {
     console.error(e);
   }
+  console.log(`Downloaded ${book.name}...`);
 }
 
 const get_script = async () => {
