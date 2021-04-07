@@ -75,7 +75,6 @@ const download_book = async (book) => {
   catch (e) {
     console.error(e);
   }
-  console.log(`Downloaded ${book.name}...`);
 }
 
 const get_script = async () => {
@@ -91,7 +90,8 @@ const get_script = async () => {
   await books.reduce(async (prevBook, book) => {
     //console.log(`sync_light_novel "${book.url}" "${book.name}.umd"`);
     await download_book(book);
-  });
+    console.log(`Downloaded ${book.name}...`);
+  }, undefined);
 
   console.log(`Finished processing ${books.length} books...`);
 }
