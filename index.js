@@ -12,7 +12,7 @@ const download_path = process.env.WENKU8_DOWNLOAD_PATH || process.cwd();
 const wenku8_url = `https://www.wenku8.net`;
 const wenku8_login = `${wenku8_url}/login.php?do=submit`;
 const wenku8_books = `${wenku8_url}/modules/article/bookcase.php`;
-const wenku8_umd_url = `https://dl1.wenku8.com/umd`;
+const wenku8_umd_url = `https://dl1.wenku8.com/down/umd`;
 
 axiosCookieJarSupport(axios);
 
