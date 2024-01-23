@@ -18,6 +18,10 @@ axiosCookieJarSupport(axios);
 
 const cookieJar = new tough.CookieJar();
 
+const sleep = async (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const login = async (username, password) => {
   const form = new FormData();
   form.append('username', username);
@@ -58,6 +62,7 @@ const download_book = async (book) => {
     const cmd = `wget -N --no-if-modified-since --no-check-certificate "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
     //console.log(cmd)
     const { stdout, stderr } = await exec(cmd);
+    await sleep(1000);
     //console.log(stdout);
     //console.log(stderr);
   }
