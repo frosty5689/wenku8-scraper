@@ -55,7 +55,7 @@ const get_books = async () => {
 
 const download_book = async (book) => {
   try {
-    const cmd = `wget -N --no-if-modified-since "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
+    const cmd = `wget -N --no-if-modified-since --no-check-certificate "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
     //console.log(cmd)
     const { stdout, stderr } = await exec(cmd);
     //console.log(stdout);
