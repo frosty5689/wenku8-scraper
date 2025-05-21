@@ -75,7 +75,6 @@ const download_book = async (book) => {
     const cmd = `wget -N --no-if-modified-since --no-check-certificate "${wenku8_umd_url}/${book.path}/${book.bookId}/${book.bookId}.umd"`
     //console.log(cmd)
     const { stdout, stderr } = await exec(cmd);
-    await sleep(1000);
     //console.log(stdout);
     //console.log(stderr);
   }
@@ -106,11 +105,25 @@ const get_script = async () => {
   process.chdir(temp_path);
   console.log(`Processing ${books.length} books...`);
   for (const book of books) {
+    console.time('Duration');
     await download_book(book);
     console.log(`Downloaded ${book.name}...`);
+    console.log(`Sleeping for 30 seconds...`);
+    await sleep(30000);
+    console.timeEnd('Duration');
   }
 
   console.log(`Finished processing ${books.length} books...`);
 }
 
 get_script();
+const testSleep = async () => {
+  console.log('Starting sleep test...');
+  console.time('sleep');
+  await sleep(2000); // Sleep for 2 seconds
+  console.timeEnd('sleep');
+  console.log('Sleep test complete');
+}
+
+// Uncomment this line to run the test
+//testSleep();
