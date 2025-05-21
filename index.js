@@ -27,6 +27,8 @@ const login = async (username, password) => {
   form.append('username', username);
   form.append('password', password);
   form.append('action', 'login');
+  form.append('usecookie', '315360000');
+  form.submit('submit', '%26%23160%3B%B5%C7%26%23160%3B%26%23160%3B%C2%BC%26%23160%3B')
 
   const response = await axios.post(wenku8_login, form, { headers: form.getHeaders(), jar: cookieJar, withCredentials: true });
   const data = response.data;
