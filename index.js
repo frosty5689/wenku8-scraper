@@ -10,7 +10,7 @@ const fs = require('fs');
 const temp_path = process.env.WENKU8_TEMP_PATH || `/tmp/light_novels`;
 const download_path = process.env.WENKU8_DOWNLOAD_PATH || process.cwd();
 const wenku8_url = `https://www.wenku8.net`;
-const wenku8_login = `${wenku8_url}/login.php?do=submit`;
+const wenku8_login = `${wenku8_url}/login.php?do=submit&jumpurl=http%3A%2F%2Fwww.wenku8.net%2Findex.php`;
 const wenku8_books = `${wenku8_url}/modules/article/bookcase.php`;
 const wenku8_umd_url = `https://dl1.wenku8.com/down/umd`;
 
@@ -18,26 +18,37 @@ axiosCookieJarSupport(axios);
 
 const cookieJar = new tough.CookieJar();
 
+const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36';
+
 const sleep = async (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const login = async (username, password) => {
   const form = new FormData();
+  
   form.append('username', username);
   form.append('password', password);
   form.append('action', 'login');
   form.append('usecookie', '315360000');
   form.append('submit', '%26%23160%3B%B5%C7%26%23160%3B%26%23160%3B%C2%BC%26%23160%3B')
 
-  const response = await axios.post(wenku8_login, form, { headers: form.getHeaders(), jar: cookieJar, withCredentials: true });
+  const headers = {
+    ...form.getHeaders(),
+    'User-Agent': userAgent
+  };
+
+  const response = await axios.post(wenku8_login, form, { headers, jar: cookieJar, withCredentials: true });
   const data = response.data;
 
   return data;
 }
 
 const get_books = async () => {
-  const response = await axios.get(wenku8_books, { jar: cookieJar, withCredentials: true, responseType: 'arraybuffer' });
+  const headers = {
+    'User-Agent': userAgent
+  }
+  const response = await axios.get(wenku8_books, { headers, jar: cookieJar, withCredentials: true, responseType: 'arraybuffer' });
   const dom = new JSDOM(response.data);
 
   const books = [];
